@@ -1,21 +1,14 @@
 const canvas = document.querySelector('#game');
 const game = canvas.getContext('2d');
+let elementsSize
+let canvasSize;
 
-window.addEventListener('load', startGame)
+
+window.addEventListener('load', setCanvasSize)
+window.addEventListener('resize', setCanvasSize)
 
 function startGame() {
-    let canvasSize;
-    if (window.innerHeight > window.innerWidth){
-        canvasSize = window.innerWidth * 0.75;
-    } else{
-        canvasSize = window.innerHeight * 0.75;
-    }
-    canvas.setAttribute('width', canvasSize)
-    canvas.setAttribute('height', canvasSize)
-
-    const elementsSize = canvasSize/10;
-
-    game.font = elementsSize + 'px Verdana'
+    game.font = elementsSize + 'px Verdana';
     game.textAlign ='end';
     game.fillText(emojis['X'], elementsSize, elementsSize);
     
@@ -30,4 +23,19 @@ function startGame() {
     // game.fillStyle = 'purple'
     // game.textAlign = 'center'
     // game.fillText('Arnol', 25, 25)
+}
+
+
+function setCanvasSize(){
+    if (window.innerHeight > window.innerWidth){
+        canvasSize = window.innerWidth * 0.75;
+    } else{
+        canvasSize = window.innerHeight * 0.75;
+    }
+    canvas.setAttribute('width', canvasSize)
+    canvas.setAttribute('height', canvasSize)
+
+    elementsSize = canvasSize/10;
+
+    startGame();
 }
