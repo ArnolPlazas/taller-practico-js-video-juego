@@ -15,20 +15,21 @@ function startGame() {
     const map = maps[2]
     const mapRows = map.trim().split('\n');
     const mapRowCols = mapRows.map(row => row.trim().split(''));
+
+    mapRowCols.forEach((row, rowIndex) => {
+        row.forEach((col, colIndex) =>{
+            const emoji = emojis[col]
+            const posX = elementsSize * (colIndex + 1);
+            const posY = elementsSize * (rowIndex + 1);
+            game.fillText(emoji, posX, posY)
+        })
+    });
     
-    for (let row = 1; row <= 10; row++) {
-        for (let col = 1; col <= 10; col++) {
-            game.fillText(emojis[mapRowCols[row - 1][col - 1]], elementsSize*col, elementsSize*row);
-        }
-    }
-
-    // game.fillRect(0, 0, 100, 100);
-    // game.clearRect(0, 0, 50, 50);
-
-    // game.font = '25px Verdana'
-    // game.fillStyle = 'purple'
-    // game.textAlign = 'center'
-    // game.fillText('Arnol', 25, 25)
+    // for (let row = 1; row <= 10; row++) {
+    //     for (let col = 1; col <= 10; col++) {
+    //         game.fillText(emojis[mapRowCols[row - 1][col - 1]], elementsSize*col, elementsSize*row);
+    //     }
+    // }
 }
 
 
