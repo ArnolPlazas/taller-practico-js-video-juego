@@ -95,21 +95,40 @@ function moveplayer() {
 
 
 function moveUp() {
-    playerPosition.y -= elementsSize;
-    startGame();
+    if((playerPosition.y - elementsSize) < elementsSize){
+
+    } else{
+        playerPosition.y -= elementsSize;
+        startGame();
+    }
 }
 
 function moveDown() {
-    playerPosition.y += elementsSize;
-    startGame();
+    if((playerPosition.y + elementsSize) > canvasSize){
+    
+    }
+    else{
+        playerPosition.y += elementsSize;
+        startGame();
+    }
 }
 
 function moveLeft() {
-    playerPosition.x -= elementsSize;
-    startGame();
+    if((playerPosition.x - elementsSize) < elementsSize){
+    
+    }
+    else{
+        playerPosition.x -= elementsSize;
+        startGame();
+    }
 }
 
 function moveRight() {
-    playerPosition.x += elementsSize;
-    startGame();
+    if((playerPosition.x + elementsSize) > canvasSize){
+    
+    }
+    else{
+        playerPosition.x += elementsSize;
+        startGame();
+    }
 }
