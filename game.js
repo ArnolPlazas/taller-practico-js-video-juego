@@ -11,6 +11,11 @@ const playerPosition = {
     y: undefined,
 }
 
+const giftPosition = {
+    x: undefined,
+    y: undefined,
+}
+
 let elementsSize
 let canvasSize;
 
@@ -33,8 +38,8 @@ function startGame() {
     mapRowCols.forEach((row, rowIndex) => {
         row.forEach((col, colIndex) =>{
             const emoji = emojis[col]
-            const posX = elementsSize * (colIndex + 1);
-            const posY = elementsSize * (rowIndex + 1);
+            const posX = Math.floor(elementsSize * (colIndex + 1));
+            const posY = Math.floor(elementsSize * (rowIndex + 1));
             game.fillText(emoji, posX, posY)
 
             if(col == 'O'){
@@ -42,6 +47,9 @@ function startGame() {
                     playerPosition.x = posX;
                     playerPosition.y = posY;
                }
+            } else if (col == 'I'){
+                giftPosition.x = posX;
+                giftPosition.y = posY;
             }
         })
     });
@@ -90,6 +98,9 @@ function moveByKeys(event) {
 }
 
 function moveplayer() {
+    if(playerPosition.x == giftPosition.x && playerPosition.y == giftPosition.y){
+        console.log('You achieved to get to goal.');
+    }
     game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y)
 }
 
