@@ -16,6 +16,9 @@ const giftPosition = {
     y: undefined,
 }
 
+let enemyPositions = []
+
+
 let elementsSize
 let canvasSize;
 
@@ -28,18 +31,19 @@ function startGame() {
     game.textAlign ='end';
     game.fillText(emojis['X'], elementsSize, elementsSize);
 
-    const map = maps[2]
+    const map = maps[0]
     const mapRows = map.trim().split('\n');
     const mapRowCols = mapRows.map(row => row.trim().split(''));
 
 
     game.clearRect(0, 0, canvasSize, canvasSize);
+    enemyPositions = [];
 
     mapRowCols.forEach((row, rowIndex) => {
         row.forEach((col, colIndex) =>{
             const emoji = emojis[col]
-            const posX = Math.floor(elementsSize * (colIndex + 1));
-            const posY = Math.floor(elementsSize * (rowIndex + 1));
+            const posX = elementsSize * (colIndex + 1);
+            const posY = elementsSize * (rowIndex + 1);
             game.fillText(emoji, posX, posY)
 
             if(col == 'O'){
@@ -50,6 +54,11 @@ function startGame() {
             } else if (col == 'I'){
                 giftPosition.x = posX;
                 giftPosition.y = posY;
+            } else if (col == 'X'){
+                enemyPositions.push({
+                    x: posX,
+                    y: posY
+                })
             }
         })
     });
@@ -98,10 +107,18 @@ function moveByKeys(event) {
 }
 
 function moveplayer() {
-    if(playerPosition.x == giftPosition.x && playerPosition.y == giftPosition.y){
+    if(playerPosition.x.toFixed(1) == giftPosition.x.toFixed(1) && playerPosition.y.toFixed(1) == giftPosition.y.toFixed(1)){
         console.log('You achieved to get to goal.');
     }
     game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y)
+
+    const enemyCollision = enemyPositions.find(enemy =>{
+        return enemy.x.toFixed(1) == playerPosition.x.toFixed(1) && enemy.y.toFixed(1) == playerPosition.y.toFixed(1) 
+    });
+
+    if (enemyCollision){
+        console.log('there was collision');
+    }
 }
 
 
